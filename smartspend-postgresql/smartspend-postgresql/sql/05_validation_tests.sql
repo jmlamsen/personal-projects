@@ -1,0 +1,97 @@
+-- ============================================================
+-- SmartSpend: Personal Expense Tracker
+-- File: 05_validation_tests.sql
+-- Purpose: Demonstrate that database constraints work.
+-- ============================================================
+--
+-- IMPORTANT:
+-- Each statement below is intentionally invalid and should fail.
+-- Keep all statements commented by default.
+-- Uncomment and run only ONE test at a time.
+--
+
+-- Test 1: Duplicate category name
+-- Expected: unique-constraint violation.
+--
+-- INSERT INTO categories (
+--     category_name,
+--     category_type,
+--     monthly_budget
+-- )
+-- VALUES (
+--     'Food',
+--     'Need',
+--     5000.00
+-- );
+
+
+-- Test 2: Negative expense amount
+-- Expected: check-constraint violation.
+--
+-- INSERT INTO expenses (
+--     category_id,
+--     expense_date,
+--     description,
+--     amount,
+--     payment_method
+-- )
+-- VALUES (
+--     1,
+--     DATE '2026-07-01',
+--     'Invalid negative expense',
+--     -100.00,
+--     'Cash'
+-- );
+
+
+-- Test 3: Nonexistent category ID
+-- Expected: foreign-key violation.
+--
+-- INSERT INTO expenses (
+--     category_id,
+--     expense_date,
+--     description,
+--     amount,
+--     payment_method
+-- )
+-- VALUES (
+--     9999,
+--     DATE '2026-07-01',
+--     'Invalid category',
+--     100.00,
+--     'Cash'
+-- );
+
+
+-- Test 4: Unsupported payment method
+-- Expected: check-constraint violation.
+--
+-- INSERT INTO expenses (
+--     category_id,
+--     expense_date,
+--     description,
+--     amount,
+--     payment_method
+-- )
+-- VALUES (
+--     1,
+--     DATE '2026-07-01',
+--     'Invalid payment method',
+--     100.00,
+--     'Cryptocurrency'
+-- );
+
+
+-- Test 5: Invalid category type
+-- Expected: check-constraint violation.
+--
+-- INSERT INTO categories (
+--     category_name,
+--     category_type,
+--     monthly_budget
+-- )
+-- VALUES (
+--     'Other',
+--     'Optional',
+--     500.00
+-- );
